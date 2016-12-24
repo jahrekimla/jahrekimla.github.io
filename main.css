@@ -1,0 +1,44 @@
+
+body {
+    /*background-color: Aqua;
+    background-image: url("https://static.pexels.com/photos/126590/pexels-photo-126590.jpeg");
+    background-attachment: fixed;*/
+    }
+
+table,th {
+  border-style: solid;border-color:black;border-width: 1px;
+  border-collapse: collapse;
+}
+td{
+  border-top: 1px solid #ddd;
+  text-align: center;
+
+}
+th,td{
+  height: 40px;
+  width: 150px;
+}
+th{
+  background-color: #4CAF50;
+  color: white;
+}
+td:hover{background-color:#ff00ff}
+tr:nth-child(even){background-color: #ffdddd
+}
+
+#myDIV {
+
+    color: red;
+    -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
+    animation: mymove 5s infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+    50% {color: blue;}
+}
+
+/* Standard syntax */
+@keyframes mymove {
+    50% {color: blue;}
+}
