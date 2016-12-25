@@ -1,9 +1,41 @@
-
 body {
-    /*background-color: Aqua;
-    background-image: url("https://static.pexels.com/photos/126590/pexels-photo-126590.jpeg");
-    background-attachment: fixed;*/
-    }
+  margin:0;
+  background: #ffffff url("http://cs.deu.edu.tr/images/logo/logo.png") no-repeat right top fixed;
+  margin-top: 70px;
+  margin-right: 200px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+li:last-child {     /*contact`tan sonra border gelmemesi icin*/
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
 
 table,th {
   border-style: solid;border-color:black;border-width: 1px;
@@ -12,7 +44,6 @@ table,th {
 td{
   border-top: 1px solid #ddd;
   text-align: center;
-
 }
 th,td{
   height: 40px;
@@ -27,17 +58,14 @@ tr:nth-child(even){background-color: #ffdddd
 }
 
 #myDIV {
-
     color: red;
     -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
     animation: mymove 5s infinite;
 }
-
 /* Chrome, Safari, Opera */
 @-webkit-keyframes mymove {
     50% {color: blue;}
 }
-
 /* Standard syntax */
 @keyframes mymove {
     50% {color: blue;}
