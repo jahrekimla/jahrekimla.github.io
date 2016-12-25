@@ -10,41 +10,39 @@
     <h1 align=center>OZGUR GURCAN</h1>
   </div>
 
-<ul>
-  <li><a href="index.html">Home</a></li>
-  <li><a href="contact.html">Contact</a></li>
-  <li><a href="about.html">About me</a></li>
-</ul>
-<!--
-<table class="first" align=center>
-  <tr>
-    <th>First name</th>
-    <th>Last name</th>
-  </tr>
-  <tr>
-    <td><a href="https://www.facebook.com/zgrgrcn">ozgur-face</a></td>
-    <td>Gurcan</td>
-  </tr>
-  <tr>
-    <td>Fulden</td>
-    <td>Dogan</td>
-  </tr>
-</table>
--->
-<p>Sample Table</p>
-<table>
-<tr>
-  <td> col1 </td>
-  <td> Row1 </td>
-</tr>
-<tr>
-  <td> col1 </td>
-  <td> Row2 </td>
-</tr>
-<tr>
-  <td> col1 </td>
-  <td> Row3 </td>
-</tr>
+  <ul class="ust_liste">
+    <li class="ust_liste"><a class="active" href="index.html">Home</a></li>
+    <li class="ust_liste"><a href="contact.html">Contact</a></li>
+    <li class="ust_liste"><a href="about.html">About me</a></li>
+  </ul>
+
+<p class="genel"><a href="http://www.deu.edu.tr/en/">Dokuz eylul University</a></p>
+<p class="genel"><a href="http://www.eng.deu.edu.tr/index.php/en/">Engineering Faculty</a></p>
+<p class="genel"><a href="http://ceng.deu.edu.tr/?q=en">Computer Engineering</a></p>
+
+<!-- Add Google Maps -->
+<div id="googleMap" style="height:400px;width:50%"></div>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+var myCenter = new google.maps.LatLng(38.368747, 27.209987);
+
+function initialize() {
+    var mapProp = {
+    center: myCenter,
+    zoom: 16,
+    scrollwheel: false,  <!-- tekerlek donmesini kapatma -->
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+var marker = new google.maps.Marker({
+    position: myCenter,
+});
+<!-- kirmizi isareti koyma -->
+marker.setMap(map);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
 
 
 </body>

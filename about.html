@@ -6,30 +6,53 @@
 </head>
 
 <body>
-  <ul>
-    <li><a class="active" href="index.html">Home</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="about.html">About me</a></li>
+  <ul class="ust_liste">
+    <li class="ust_liste"><a class="active" href="index.html">Home</a></li>
+    <li class="ust_liste"><a href="contact.html">Contact</a></li>
+    <li class="ust_liste"><a href="about.html">About me</a></li>
   </ul>
-<h1>Ozgur GURCAN</h1>
+<p class="ust">Hello and welcome to my first website, my name is Ozgur gurcan.</p>
+<p>Last year I was in mechanical engineering department</p>
+<p title="YGS/LYS=Entrance exam for university">I entered the YGS/LYS again/<p>
+<p>Now I am a computer engineering student at Dokuz eylul University.</p>
+<h1 class="genel">The summary of my life</h1>
 
-<p>Dokuz eylul University</p>
-<p>Engineering Faculty</p>
-<p>Computer Engineering</p>
-
-<div id="map" style="width:35%;height:300px"></div>
-
-<script>
-function myMap() {
-  var mapCanvas = document.getElementById("map");
-  var mapOptions = {
-    center: new google.maps.LatLng(38.368747, 27.209987),
-    zoom: 16
-  }
-  var map = new google.maps.Map(mapCanvas, mapOptions);
-}
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+<table style="width:50%" id="aile_tablosu">
+  <tr>
+    <th colspan="2" style="font-size:30px;">Family</th>
+  </tr>
+  <tr>
+    <td>Father</td>
+    <td>Muharrem Gurcan</td>
+  </tr>
+  <tr>
+    <td>Mother</td>
+    <td>Guzide gurcan</td>
+  </tr>
+  <tr>
+    <td>Sister</td>
+    <td>Ozge gurcan</td>
+  </tr>
+</table>
+<hr style="width:50%" align=left>
+<p style="font-size:30px;"><strong>Edudaction</strong></p>
+<ul>
+  <li>Elementary school</li>
+  <ul>
+    <li>Mehmetcik primary school</li>
+    <li>Gazikent middle school</li>
+  </ul>
+  <li>High school
+    <ul>
+      <li>Bornova anatolian high school</li>
+    </ul>
+  </li>
+  <li>License</li>
+  <ul>
+    <li>DEU Mechanical Engineering</li>
+    <li>DEU Computer Engineering</li>
+  </ul>
+</ul>
+<hr style="width:50%" align=left>
 </body>
 </html>

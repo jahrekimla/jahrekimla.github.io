@@ -4,9 +4,11 @@ body {
 
   margin-top: 70px;
   margin-right: 200px;
+  margin-left: 50px;
+
 }
 
-ul {
+ul.ust_liste {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -15,9 +17,10 @@ ul {
     position: fixed;
     top: 0;
     width: 100%;
+    margin-left: -50px;
 }
 
-li {
+li.ust_liste {
     float: left;
     border-right:1px solid #bbb;
 }
@@ -37,59 +40,37 @@ li a {
 li a:hover:not(.active) {
     background-color: #111;
 }
-/*
-table,th {
-  border-style: solid;border-color:black;border-width: 1px;
-  border-collapse: collapse;
-}
-td{
-  border-top: 1px solid #ddd;
-  text-align: center;
-}
-th,td{
-  height: 40px;
-  width: 150px;
-}
-th{
-  background-color: #4CAF50;
-  color: white;
-}
-td:hover{background-color:#ff00ff}
-tr:nth-child(even){background-color: #ffdddd
-}
-*/
-table { color:blue; border-width: 5px;
-  border-color: yellow;
-  background-color: grey;
-   border-style: double;
-   border-collapse: collapse;
-   }
-tr, th, td{
-   border-width:1px;border-style: solid;height: 60px;width: 180px; }
-td{
-  text-align: center;
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 75%;
 }
 
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
 
 #myDIV {
     color: #ff8000;
     -webkit-animation: mymove 8s infinite;
     animation: mymove 8s infinite;
 }
-/*
-@-webkit-keyframes mymove {
-    50% {color: blue;}
-}*/
-
 @keyframes mymove {
     50% {color: blue;}
 }
 
 a:link, a:visited{
 	color: #ff8000;
-	text-decoration: underline;
- }
+	 }
 a:hover, a:active{
 	color: #0000ff;
-	text-decoration: none;
- }
+	 }
+
+#aile_tablosu th{
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+}
+#aile_tablosu tr:hover {background-color: #ddd;}
