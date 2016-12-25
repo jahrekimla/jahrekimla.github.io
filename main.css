@@ -37,7 +37,7 @@ li a {
 li a:hover:not(.active) {
     background-color: #111;
 }
-
+/*
 table,th {
   border-style: solid;border-color:black;border-width: 1px;
   border-collapse: collapse;
@@ -57,17 +57,39 @@ th{
 td:hover{background-color:#ff00ff}
 tr:nth-child(even){background-color: #ffdddd
 }
+*/
+table { color:blue; border-width: 5px;
+  border-color: yellow;
+  background-color: grey;
+   border-style: double;
+   border-collapse: collapse;
+   }
+tr, th, td{
+   border-width:1px;border-style: solid;height: 60px;width: 180px; }
+td{
+  text-align: center;
+}
+
 
 #myDIV {
-    color: red;
-    -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
-    animation: mymove 5s infinite;
+    color: #ff8000;
+    -webkit-animation: mymove 8s infinite;
+    animation: mymove 8s infinite;
 }
-/* Chrome, Safari, Opera */
+/*
 @-webkit-keyframes mymove {
     50% {color: blue;}
-}
-/* Standard syntax */
+}*/
+
 @keyframes mymove {
     50% {color: blue;}
 }
+
+a:link, a:visited{
+	color: #ff8000;
+	text-decoration: underline;
+ }
+a:hover, a:active{
+	color: #0000ff;
+	text-decoration: none;
+ }

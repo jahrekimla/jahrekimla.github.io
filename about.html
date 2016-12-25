@@ -1,44 +1,35 @@
 <!DOCTYPEhtml>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/main.css">
-<title>Ozgur Gurcan</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<title>About me</title>
 </head>
 
 <body>
   <ul>
     <li><a class="active" href="index.html">Home</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="about.html">About me</a></li>
   </ul>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
-<p>hakkimda</p>
+<h1>Ozgur GURCAN</h1>
 
+<p>Dokuz eylul University</p>
+<p>Engineering Faculty</p>
+<p>Computer Engineering</p>
+
+<div id="map" style="width:35%;height:300px"></div>
+
+<script>
+function myMap() {
+  var mapCanvas = document.getElementById("map");
+  var mapOptions = {
+    center: new google.maps.LatLng(38.368747, 27.209987),
+    zoom: 16
+  }
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
 </body>
 </html>
