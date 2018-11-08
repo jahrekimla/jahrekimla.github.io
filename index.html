@@ -1,8 +1,12 @@
 <html>
 <body> 
-<input id="RE" type="text" value="a+b"/></p>
-<input id="input" type="text" value="a"/></p>
-<button id="butonclickim" type="text" onclick="clickim()">Check input</button>
+<input id="RE" type="text" value="a+b"/>
+<button id="RandomRE" type="text" onclick="randomRE()">Generate Random regex</button>
+</p>
+<input id="input" type="text" value="a"/>
+<button id="RandomInput" type="text" onclick="randomInput()">Generate Random input</button>
+</p>
+<button id="butonclickim" type="text" onclick="check()">Check input</button>
 
 
 </body>
@@ -36,9 +40,18 @@ class stateNode {
 	this.isVisited=false;
  }
 }
-function clickim() {
+
+function check() {
 	reset();
 	main();
+}
+
+function randomInput(){
+	document.getElementById('input').value="abc";
+}
+
+function randomRE(){
+	var RE=document.getElementById('RE').value="(a+b+c)*";
 }
 
 function reset(){
@@ -281,12 +294,12 @@ function isRegexTrue(node){
 	for(var i=0; i<isVisitedArray.length; i++){
 		if(isVisitedArray[i].isAccept){
 			document.body.style.backgroundColor = "green";
-			document.getElementById("butonclickim").innerHTML= "Ferhat kuduurrrrrrrrr!!!";
+			document.getElementById("butonclickim").innerHTML= "Ferhat kuduurrrr!!!";
 			return true;
 			}
 	}
 	document.body.style.backgroundColor = "red";
-	document.getElementById("butonclickim").innerHTML= "false";
+	document.getElementById("butonclickim").innerHTML= "Ferhat daha da kuduurrrr!!!";
 	return false;
 }
 
@@ -313,7 +326,7 @@ function StringCheck(node){
 		isRegexTrue(temp);
 	else {
 		document.body.style.backgroundColor = "red";
-		document.getElementById("butonclickim").innerHTML= "false"; }
+		document.getElementById("butonclickim").innerHTML= "Ferhat daha da kuduurrrr!!!"; }
 }
 
 function recursive(node){//prev eklenicek
