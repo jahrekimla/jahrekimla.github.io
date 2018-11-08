@@ -22,7 +22,11 @@ var randomREarray=["cc(c+b)","c(d+c)+cd","b*c+c+b","(c+b)*+d","a*+d+c",
 "(b*a*db)*+c","c+(a+bd)*+b","d(b+bad)","d(c+d)*","a*b(aca)*",
 "cc*c","ccc*(d+a)*","b(a+c)bd","bbc*+dd*","d(c*+a+d)",
 "bb+c+(db)*","bbdad*","(bd+b)b","ba+d+a+b","(d+a+b)*"];
-var randomInput=[];
+var randomInputarray=["a","b","c","d",
+"aa","ab","ac","ad",
+"ba","bb","bc","bd",
+"ca","cb","cc","cd",
+"da","db","dc","dd",];
 
 //var RE=prompt ("write regular expression","(a+b)\*"); 
 var RE=document.getElementById('RE').value;
@@ -54,7 +58,8 @@ function check() {
 }
 
 function randomInput(){
-	document.getElementById('input').value="abc";
+	document.getElementById('input').value=randomInputarray[Math.floor(Math.random() * randomInputarray.length)];
+	check();
 }
 
 function randomRE(){
