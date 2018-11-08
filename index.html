@@ -58,8 +58,8 @@ function randomInput(){
 }
 
 function randomRE(){
-	/*var RE=*/document.getElementById('RE').value=randomREarray[Math.floor(Math.random() * randomREarray.length)];
-	var rand = randomREarray[Math.floor(Math.random() * randomREarray.length)];
+	document.getElementById('RE').value=randomREarray[Math.floor(Math.random() * randomREarray.length)];
+	check();
 }
 
 function reset(){
