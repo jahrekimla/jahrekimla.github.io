@@ -1,1 +1,367 @@
-
+<html>	
+<body> 	
+<center>	
+<input id="RE" type="text" value="a+b"/>	
+<button id="RandomRE" type="text" onclick="randomRE()">Generate Random regex</button>	
+</p>	
+<input id="input" type="text" value="a"/>	
+<button id="RandomInput" type="text" onclick="randomInput()">Generate Random input</button>	
+</p>	
+<button id="butonclickim" type="text" onclick="check()">Check input</button>	
+</center>	
+ </body>	
+<script>	
+var baslangic = -1,bitis = -1; //parantezler icin	
+var nodeArray = []; 	
+var concatArray = [];	
+var nodeID = 0;	
+var isVisitedArray = [];	
+var operandisVisitedArray = [];	
+var randomREarray=["cc(c+b)","c(d+c)+cd","b*c+c+b","(c+b)*+d","a*+d+c",	
+"(b*a*db)*+c","c+(a+bd)*+b","d(b+bad)","d(c+d)*","a*b(aca)*",	
+"cc*c","ccc*(d+a)*","b(a+c)bd","bbc*+dd*","d(c*+a+d)",	
+"bb+c+(db)*","bbdad*","(bd+b)b","ba+d+a+b","(d+a+b)*"];	
+var randomInputarray=["a","b","c","d",	
+"aa","ab","ac","ad",	
+"ba","bb","bc","bd",	
+"ca","cb","cc","cd",	
+"da","db","dc","dd",];	
+ //var RE=prompt ("write regular expression","(a+b)\*"); 	
+var RE=document.getElementById('RE').value;	
+//var input=prompt ("write input","abab");	
+var input=document.getElementById('input').value;	
+ class yolNode {	
+ constructor(){	
+    this.value;	
+	this.sNext;	
+ }	
+}	
+ class stateNode {	
+ constructor(){	
+	this.yPrev=[];//birden fazla prev olmasada olur 	
+    this.value = ++nodeID;	
+	this.yNext=[];	
+	this.isAccept =false;	
+	this.isVisited=false;	
+ }	
+}	
+ function check() {	
+	reset();	
+	main();	
+}	
+ function randomInput(){	
+	document.getElementById('input').value=randomInputarray[Math.floor(Math.random() * randomInputarray.length)];	
+	check();	
+}	
+ function randomRE(){	
+	document.getElementById('RE').value=randomREarray[Math.floor(Math.random() * randomREarray.length)];	
+	check();	
+}	
+ function reset(){	
+	baslangic = -1,bitis = -1; //parantezler icin	
+	nodeArray = []; 	
+	concatArray = [];	
+	nodeID = 0;	
+	isVisitedArray = [];	
+	operandisVisitedArray = [];	
+	RE=document.getElementById('RE').value;	
+	input=document.getElementById('input').value;	
+}	
+ function main(){	
+	for(var i = 0; i<RE.length; i++){//Nodearray fills	
+		if(RE[i] != '+' && RE[i] != '*'&& RE[i] != '(' && RE[i] != ')'){	
+			nodeArray.push(createNode(RE[i]));	
+		}	
+		else{	
+			nodeArray.push(RE[i]);	
+		}	
+	}	
+	parantezbulucu();	
+	while(nodeArray.length != 1){//Create NFA	
+		if(bitis != -1 && baslangic != -1 && !checkParantez()){//Parentez ici	
+			parantezici();	
+		}	
+		for(var i= 0; i<nodeArray.length; i++){	
+		if(nodeArray[i] == '*'){	
+			nodeArray[i] = null;	
+			nodeArray[i-1] = star(nodeArray[i-1]);	
+			nodeArray = removeNull(nodeArray);	
+			i--;	
+			}	
+		}	
+		for(var i= 0; i<nodeArray.length-1; i++){	
+			if(nodeArray[i] != '+' && nodeArray[i] != '*' && nodeArray[i+1] != '+' && nodeArray[i+1] != '*'){	
+				nodeArray[i] = concat(nodeArray[i],nodeArray[i+1]);	
+				nodeArray[i+1] = null;	
+				nodeArray = removeNull(nodeArray);	
+				i--;	
+			}	
+		}	
+		for(var i= 0; i<nodeArray.length-1; i++){	
+			if(nodeArray[i] == '+'){	
+				nodeArray[i-1] = union(nodeArray[i-1],nodeArray[i+1]);	
+				nodeArray[i+1] = null;	
+				nodeArray[i] = null;	
+				nodeArray = removeNull(nodeArray);	
+				i--;	
+			}	
+		}	
+	} 	
+	var temp=nodeArray[0]; 	
+	StringCheck(temp);	
+}	
+ function parantezici() {	
+	for(var i= baslangic+1; i<bitis; i++){	
+	if(nodeArray[i] == '*'){	
+		nodeArray[i] = null;	
+		nodeArray[i-1] = star(nodeArray[i-1]);	
+		nodeArray = removeNull(nodeArray);	
+		bitis--;	
+		i--;	
+		}	
+	}	
+	for(var i= baslangic+1; i<bitis-1; i++){	
+		if(nodeArray[i] != '+' && nodeArray[i] != '*' && nodeArray[i+1] != '+' && nodeArray[i+1] != '*'){	
+			nodeArray[i] = concat(nodeArray[i],nodeArray[i+1]);	
+			nodeArray[i+1] = null;	
+			nodeArray = removeNull(nodeArray);	
+			bitis--;	
+			i--;	
+		}	
+	}	
+	for(var i= baslangic+1; i<bitis-1; i++){	
+		if(nodeArray[i] == '+'){	
+			nodeArray[i-1] = union(nodeArray[i-1],nodeArray[i+1]);	
+			nodeArray[i+1] = null;	
+			nodeArray[i] = null;	
+			nodeArray = removeNull(nodeArray);	
+			bitis--;	
+			bitis--;	
+			i--;	
+		}	
+	}	
+	nodeArray[baslangic] = null;	
+	nodeArray[bitis] = null;	
+	nodeArray = removeNull(nodeArray);	
+}	
+ function checkParantez() {	
+	if(bitis == baslangic+2)	
+		return true;	
+	else	
+		return false;	
+}	
+ function parantezbulucu() {	
+	for (var i = 0; i < RE.length; i++) { 	
+		if(RE[i]=='(')	
+			this.baslangic=i;	
+		if(RE[i]==')')	
+			this.bitis=i;	
+	}	
+}	
+ function removeNull(array){	
+	var newArray = [];	
+	for(var i=0; i<array.length; i++){	
+		if(array[i] != null)	
+			newArray.push(array[i]);	
+	}	
+	return newArray;	
+}	
+ function createNode(str){//basic node creation	
+	var startNode = new stateNode();	
+	var endNode = new stateNode();	
+	var yol = new yolNode();	
+	endNode.isAccept=true;	
+	yol.value = str;	
+	startNode.yNext.push(yol);	
+	yol.sNext = endNode;	
+	return startNode;	
+}	
+ function star(node){	
+	var addAccept = new stateNode();//başa accept node ekle 	
+	var yol = new yolNode();//$ ile baştaki accepti noda baplayan yol	
+	addAccept.isAccept=true;	
+	yol.value='$';	
+	addAccept.yNext.push(yol);//connect new accept state with yol '$'	
+	var temp = node;	
+	recursiveAddWay(node,temp);	
+	yol.sNext=node;	
+	node=addAccept;	
+	return node;	
+}	
+ function recursiveAddWay(node,temp){	
+	 if(temp != null){	
+		 var length = temp.yNext.length;	
+        if(temp.isAccept==true){	
+			var yolNode2 = new yolNode();//$ yolnode for prev connection star operation	
+			yolNode2.value='$';	
+			yolNode2.sNext =node;//use node first start point	
+			temp.yPrev.push(yolNode2);	
+		}	
+			for(var i=0;i<length;i++){	
+				recursiveAddWay(node,nextStateNode(temp,i));	
+			}	
+            return temp;	
+    } 	
+	else {	
+        return null;	
+    }	
+}	
+ function nextStateNode(node,i){//multi level	
+	if(node.yNext.length == 0)	
+		return null;	
+		node=node.yNext[i];	
+		node=node.sNext; 	
+		return node;	
+}	
+ function prevStateNode(node,i){//multi level	
+	if(node.yPrev.length == 0)	
+		return null;	
+		node=node.yPrev[i];	
+		node=node.sNext; 	
+		return node;	
+}	
+ function union(node1,node2){	
+	var state = new stateNode();	
+	var yol1 = new yolNode();	
+	var yol2 = new yolNode();	
+	yol1.value = '$';	
+	yol2.value = '$';	
+	yol1.sNext = node1;	
+	yol2.sNext = node2;	
+	state.yNext.push(yol1);	
+	state.yNext.push(yol2);	
+	return state;	
+}	
+ function concat(node1,node2){	
+	concatArray = [];	
+	var temp=node1;	
+	recursiveAddWayConcate(node2,temp);	
+	var tempconcatArray = [];	
+		
+	for(var i=0;i<concatArray.length;i++){	
+		for(var j=0;j< concatArray.length;j++){	
+			if(concatArray[i]!=null &&concatArray[j]!=null &&concatArray[i]==concatArray[j] && i!=j){	
+				concatArray[i]=null;	
+			}	
+		} 	
+			
+	}	
+	 concatArray=removeNull(concatArray);	
+	for(var i=0; i<concatArray.length; i++){	
+		concatArray[i].isAccept=false;	
+		var yolNode2 = new yolNode();//$ yolnode for prev connection star operation	
+		yolNode2.value='$';	
+		yolNode2.sNext =node2;//use node first start point	
+		concatArray[i].yNext.push(yolNode2);//sıkıntı ekleme arttırıyor 	
+	}	
+	return node1;	
+}	
+ function recursiveAddWayConcate(node,temp){//node3 tempin aynısı 		
+		if(temp != null){	
+				var length = temp.yNext.length;	
+				if(temp.isAccept==true){	
+					concatArray.push(temp);	
+		}	
+			for(var i=0;i<length;i++){ 	 	
+				recursiveAddWayConcate(node,nextStateNode(temp,i));	
+			}	
+         return temp;	
+		} 	
+    return null;	
+}	
+ function visitedNodes(node){	
+	for(var i= 0; i<node.yNext.length; i++)	
+		visitedNodes(nextStateNode(node,i));	
+	if(node.isVisited){	
+		isVisitedArray.push(node);	
+	}	
+}	
+ function isRegexTrue(node){	
+	isVisitedArray = [];	
+	visitedNodes(node);	
+	for(var i=0; i<isVisitedArray.length; i++){	
+		if(isVisitedArray[i].isAccept){	
+			document.body.style.backgroundColor = "green";	
+			document.getElementById("butonclickim").innerHTML= "Ferhat kuduurrrr!!!";	
+			return true;	
+			}	
+	}	
+	document.body.style.backgroundColor = "red";	
+	document.getElementById("butonclickim").innerHTML= "Ferhat daha da kuduurrrr!!!";	
+	return false;	
+}	
+ function StringCheck(node){	
+	var temp= node;	
+	temp.isVisited=true;	
+	recursive(temp); 	
+	var regexFinish = true;	
+	for(var k=0;k<input.length;k++){	
+		operandisVisitedArray = [];	
+		recursiveOperand(temp,input[k]);	
+		for(var j = 0; j<operandisVisitedArray.length; j++)	
+			operandisVisitedArray[j].isVisited = true; 	
+		if(operandisVisitedArray.length == 0) {	
+			regexFinish = false;	
+			break;	
+		}	
+		isVisitedArray = [];	
+		visitedNodes(temp);	
+		for(var j = 0; j<isVisitedArray.length; j++)	
+			recursive(isVisitedArray[j]);	
+	}	
+	if(regexFinish)	
+		isRegexTrue(temp);	
+	else {	
+		document.body.style.backgroundColor = "red";	
+		document.getElementById("butonclickim").innerHTML= "Ferhat daha da kuduurrrr!!!"; }	
+}	
+ function recursive(node){//prev eklenicek	
+	 if(node != null){	
+		 var length = node.yNext.length; 	
+		 var prevLength = node.yPrev.length;	
+			for(var i=0;i<length;i++){ 	
+				if(node.yNext[i].value=='$'){	
+					node.yNext[i].sNext.isVisited=true;	
+					recursive(nextStateNode(node,i)); 	
+				}		
+			}	
+			for(var i=0;i<prevLength;i++){ 	
+				if(node.yPrev[i].value=='$'){	
+					node.yPrev[i].sNext.isVisited=true;	
+					recursive(prevStateNode(node,i)); 	
+				}		
+			}	
+            return node;	
+    } 	
+	else {	
+        return null;	
+    }	
+}  	
+ function recursiveOperand(node,str){//prev eklenicek	
+	 if(node != null){	
+		 var length = node.yNext.length; 	
+		 var prevLength = node.yPrev.length;	
+			for(var i=0;i<length;i++){ 	
+				recursiveOperand(nextStateNode(node,i),str); 	
+				if(node.isVisited && node.yNext[i].value==str){	
+					node.isVisited=false;	
+					operandisVisitedArray.push(node.yNext[i].sNext);	
+				}	
+				else if(node.isVisited)	
+					node.isVisited = false;	
+			}	
+/*			for(var i=0;i<prevLength;i++){ 	
+				recursiveOperand(prevStateNode(node,i),str); 	
+				if(node.isVisited && node.yPrev[i].value==str){	
+					node.isVisited=false;	
+					node.yPrev[i].sNext.isVisited=true;	
+				}		
+			}*/	
+            return node;	
+    } 	
+	else {	
+        return null;	
+    }	
+} 	
+ </script>	
+</html>
